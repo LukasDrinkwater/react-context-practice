@@ -1,30 +1,39 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
+import { createContext } from "react";
+
 import "./App.css";
 import "../src/styles/reset.css";
 
-// function App() {
-//   const [count, setCount] = useState(0);
 
-//   return <h1>Our first test</h1>;
-// }
+// step 1 create the initial context, this will be the default value of the context
+const ShopContext = createContext({
+  products: [],
+  cartItems: [],
+  addToCart: () => {},
+});
+
+
 
 const App = () => {
-  const [heading, setHeading] = useState("Magnificent Monkeys");
+  const [cartItems, setCartItems] = useState([
+    /* List of Items in Cart */
+  ]);
+  const products = /* some custom hook that fetches products and returns the fetched products */
 
-  const clickHandler = () => {
-    setHeading("Radical Rhinos");
+  const addToCart = () => {
+    // add to cart logic (this adds to cartItems)
   };
 
   return (
-    <>
-      <button type="button" onClick={clickHandler}>
-        Click Me
-      </button>
-      <h1>{heading}</h1>
-    </>
+    /* We are going to pass the things that we want to inject to these
+     components using the value prop */
+    /* This value prop will overwrite the default value */
+    <ShopContext.Provider value={{cartItems, products, addToCart}}>
+      <Header />
+      <ProductDetail />
+    </ShopContext.Provider>
   );
-};
+}
 
 export default App;

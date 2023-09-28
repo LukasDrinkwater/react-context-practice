@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 
-export default function Header({ text }) {
+function Links({}) {
+  // We must pass the ShopContext object itself as an argument  return
+  const { cartItems } = useContext(ShopContext);
+  return (
+    <ul>
+      {/* Other links */}
+      <li>
+        <Link to="Link to the cart">
+          <span>Cart</span>
+          <div class="cart-icon">{cartItems.length}</div>
+        </Link>
+      </li>
+    </ul>
+  );
+}
+
+export default function Header({ cartItemsCount }) {
   return (
     <header>
-      <h1 data-testid="h1tag" className="fancy-h1">
-        {text}
-      </h1>
+      {/* Other header elements */}
+      <nav>
+        <Links />
+      </nav>
     </header>
   );
 }
